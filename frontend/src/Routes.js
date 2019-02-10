@@ -5,7 +5,6 @@ import AppliedRoute from "./components/AppliedRoute/AppliedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute/UnauthenticatedRoute";
 
 import Home from "./containers/Home/Home";
-import Resource from "./containers/Resource/Resource";
 import Login from "./containers/Login/Login";
 import Signup from "./containers/Signup/Signup";
 import NotFound from "./containers/NotFound/NotFound";
