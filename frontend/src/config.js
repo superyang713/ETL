@@ -2,16 +2,16 @@ export default {
   MAX_ATTACHMENT_SIZE: 5000000,
   s3: {
     REGION: "us-east-1",
-    BUCKET: "yang-notes-app-uploads"
+    BUCKET: "etl-backend-dev-attachmentsbucket-15pkn873qyxga"
   },
   apiGateway: {
     REGION: "us-east-1",
-    URL: "https://djzrbn94al.execute-api.us-east-1.amazonaws.com/prod"
+    URL: "https://amfzb9p885.execute-api.us-east-1.amazonaws.com/dev"
   },
   cognito: {
     REGION: "us-east-1",
-    USER_POOL_ID: "us-east-1_f84l3cgnU",
-    APP_CLIENT_ID: "3m81i83ldigqo6rl2egk4ogkl9",
-    IDENTITY_POOL_ID: "us-east-1:5005f60f-11b4-4665-8395-83ba4cee4bd8",
+    USER_POOL_ID: "us-east-1_NhB3wfcmJ",
+    APP_CLIENT_ID: "7dl4iinuk0rk4i2smsuhk11krs",
+    IDENTITY_POOL_ID: "us-east-1:c06729d1-8b40-4da8-bc33-ac701734bab9",
   }
 };

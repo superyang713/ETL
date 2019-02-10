@@ -1,0 +1,8 @@
+{
+  "body": "{\"category\":\"teacher\",\"gender\":\"male\",\"address\":\"2469 President Lane\",\"city\":\"Quincy\",\"state\":\"MA\",\"profilePic\":\"pic.jpg\"}",
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "test-user-1234"
+    }
+  }
+}

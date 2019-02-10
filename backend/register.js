@@ -1,6 +1,6 @@
 import uuid from "uuid";
-import * as dynamoDbLib from "./libs/dynamodb-lib.js";
-import { success, failure } from "./libs/response-lib.js";
+import * as dynamoDbLib from "./libs/dynamodb-lib";
+import { success, failure } from "./libs/response-lib";
 
 
 export async function main(event, context) {
@@ -9,10 +9,13 @@ export async function main(event, context) {
     TableName: process.env.tableName,
     Item: {
       userId: event.requestContext.identity.cognitoIdentityId,
-      noteId: uuid.v1(),
-      content: data.content,
-      attachment: data.attachment,
-      createdAt: Date.now()
+      userCategory: data.category,
+      gender: data.gender,
+      address: data.address,
+      city: data.city,
+      state: data.state,
+      profilePic: data.profilePic,
+      createdAt: Date.now(),
     }
   };
 
@@ -20,6 +23,7 @@ export async function main(event, context) {
     await dynamoDbLib.call("put", params);
     return success(params.Item);
   } catch (e) {
+    console.log(e)
     return failure({ status: false });
   }
 }

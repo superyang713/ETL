@@ -17,13 +17,13 @@ const Header = props =>
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <LinkContainer to="/resource">
-              <NavItem>Resource</NavItem>
-            </LinkContainer>
 
             {props.isAuthenticated
              ? <NavItem onClick={props.handleLogout}>Logout</NavItem>
              : <Fragment>
+                 <LinkContainer to="/signup">
+                   <NavItem>Sign Up</NavItem>
+                 </LinkContainer>
                  <LinkContainer to="/login">
                    <NavItem>Login</NavItem>
                  </LinkContainer>

@@ -1,4 +1,4 @@
-service: notes-app-2-api
+service: ETL-backend
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -10,7 +10,7 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-notes
+  tableName: ${self:custom.stage}-ETL-Project
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   tableThroughputs:
     prod: 5
@@ -25,7 +25,6 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  profile: fullstack-notetaking-app
   region: us-east-1
 
   # These environment variables are made available to our functions
@@ -46,60 +45,15 @@ provider:
       # Restrict our IAM role permissions to
       # the specific table for the stage
       Resource:
-        - "Fn::GetAtt": [ NotesTable, Arn ]
+        - "Fn::GetAtt": [ usersTable, Arn ]
 
 functions:
-  create:
-    # Defines an HTTP API endpoint that calls the main function in create.js
-    # - path: url path is /notes
-    # - method: GET request    
-    handler: create.main
+  register:
+    handler: register.main
     events:
       - http:
-          path: notes
+          path: register
           method: post
-          cors: true
-          authorizer: aws_iam
-    
-  get:
-    # Defines an HTTP API endpoint that calls the main function in get.js
-    # - path: url path is /notes/{id}
-    # -method: GET request
-    handler: get.main
-    events:
-      - http:
-          path: notes/{id}
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  list:
-    # Defines an HTTP API endpoint that calls the main function in list.js
-    # - path: url path is /notes
-    # - method: GET request    
-    handler: list.main
-    events:
-      - http:
-          path: notes
-          method: get
-          cors: true
-          authorizer: aws_iam
-
-  update:
-    handler: update.main
-    events:
-      - http:
-          path: notes/{id}
-          method: put
-          cors: true
-          authorizer: aws_iam
-
-  delete:
-    handler: delete.main
-    events:
-      - http:
-          path: notes/{id}
-          method: delete
           cors: true
           authorizer: aws_iam
 

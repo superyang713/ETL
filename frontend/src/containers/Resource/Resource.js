@@ -15,10 +15,6 @@ class Resource extends Component {
   };
 
   async componentDidMount() {
-    if (!this.props.isAuthenticated) {
-      return;
-    }
-
     try {
       const notes = await this.notes();
       this.setState({ notes });
@@ -90,7 +86,7 @@ class Resource extends Component {
   render() {
     return (
       <div className="Home">
-        {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
+        {this.renderNotes()}
       </div>
     );
   }
