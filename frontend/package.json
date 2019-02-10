@@ -16,8 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
-    "deploy": "aws s3 sync --profile fullstack-notetaking-app build/ s3://yang-react-note-taking-app-source-code --delete",
-    "postdeploy": "aws cloudfront --profile fullstack-notetaking-app create-invalidation --distribution-id E14VWAZNFZ1J1A --paths '/*' && aws cloudfront --profile fullstack-notetaking-app create-invalidation --distribution-id E15ROO9K1N90WX --paths '/*'",
+    "deploy": "aws s3 sync build/ s3://yang-react-note-taking-app-source-code --delete",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E14VWAZNFZ1J1A --paths '/*' && aws cloudfront create-invalidation --distribution-id E15ROO9K1N90WX --paths '/*'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
