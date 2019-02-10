@@ -23,11 +23,14 @@ class Signup extends Component {
   
   state = {
     isLoading: false,
+    newUser: null,
+    
     email: "",
     password: "",
     confirmPassword: "",
     confirmationCode: "",
-    newUser: null,
+    firstName: "",
+    lastName: "",
     category: "",
     gender: "",
     address: "",
@@ -43,7 +46,9 @@ class Signup extends Component {
       this.state.category.length > 0 &&
       this.state.gender.length > 0 &&
       this.state.city.length > 0 &&
-      this.state.state.length > 0
+      this.state.state.length > 0 &&
+      this.state.firstName.length > 0 &&
+      this.state.lastName.length > 0
   )
 
   validationConfirmationForm = () => (
@@ -69,6 +74,10 @@ class Signup extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({ isLoading: true });
+    if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
+      alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
+      return;
+    }
 
     try {
       const newUser = await Auth.signUp({
@@ -83,31 +92,30 @@ class Signup extends Component {
     this.setState({ isLoading: false });
   }
 
-  
-  createUser(user) {
-    return API.post("ETL", "/register", { body: user });
-  }
+  createUser = user => (
+    API.post("ETL", "/register", { body: user })
+  )
 
   handleConfirmationSubmit = async event => {
     event.preventDefault();
     this.setState({ isLoading: true });
 
-    if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
-      alert(`Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE/1000000} MB.`);
-      return;
-    }
 
     try {
-      const attachment = this.file ? await s3Upload(this.file) : null;
       await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
       await Auth.signIn(this.state.email, this.state.password);
+
+      const attachment = this.file ? await s3Upload(this.file) : null;
       await this.createUser({
         profilePic: attachment,
+        email: this.state.email,
         category: this.state.category,
         gender: this.state.gender,
         address: this.state.address,
         city: this.state.city,
         state: this.state.state,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
       });
       
       this.props.userHasAuthenticated(true);
@@ -199,6 +207,24 @@ class Signup extends Component {
           />
         </FormGroup>
 
+        <FormGroup controlId="firstName" bsSize="large">
+          <ControlLabel>First Name</ControlLabel>
+          <FormControl
+            value={this.state.firstName}
+            onChange={this.handleChange}
+            type="firstName"
+          />
+        </FormGroup>
+        
+        <FormGroup controlId="lastName" bsSize="large">
+          <ControlLabel>Last Name</ControlLabel>
+          <FormControl
+            value={this.state.lastName}
+            onChange={this.handleChange}
+            type="lastName"
+          />
+        </FormGroup>
+        
         <FormGroup controlId="address" bsSize="large">
           <ControlLabel>Address</ControlLabel>
           <FormControl
