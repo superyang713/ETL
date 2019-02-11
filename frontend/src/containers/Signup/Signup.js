@@ -13,6 +13,7 @@ import { s3Upload } from "../../libs/awsLib";
 import "./Signup.css";
 import LoaderButton from "../../components/LoaderButton/LoaderButton";
 import config from "../../config";
+import defaultPic from "../../asset/banner.jpg";
 
 
 class Signup extends Component {
@@ -117,12 +118,12 @@ class Signup extends Component {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
       });
-      
+
       this.props.userHasAuthenticated(true);
-      this.props.history.push("/");
+      const userInfo = await Auth.currentUserInfo();
+      this.props.history.push(`/profile/${userInfo.id}`);
       
     } catch (e) {
-      console.log(e);
       alert(e.message);
       this.setState({ isLoading: false });
     }
