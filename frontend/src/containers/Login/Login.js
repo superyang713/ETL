@@ -27,8 +27,14 @@ class Login extends Component {
     this.setState({ isLoading: true });
     
     try {
-      await Auth.signIn(this.state.email, this.state.password);
+      await Auth.signIn(
+        this.state.email,
+        this.state.password
+      );
+      
       this.props.userHasAuthenticated(true);
+      const userInfo = await Auth.currentUserInfo();
+      this.props.history.push(`/profile/${userInfo.id}`);
     } catch (e) {
       alert(e.message);
       this.setState({ isLoading: false });
