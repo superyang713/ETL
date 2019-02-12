@@ -1,4 +1,4 @@
-service: ETL-backend
+service: ETL-backend-version-1
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -10,7 +10,7 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-ETL-Project
+  tableName: ${self:custom.stage}-ETL-version-1
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   tableThroughputs:
     prod: 5
@@ -63,6 +63,15 @@ functions:
     events:
       - http:
           path: profile/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
+
+  match:
+    handler: match.main
+    events:
+      - http:
+          path: match/{userCategory}
           method: get
           cors: true
           authorizer: aws_iam

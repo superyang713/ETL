@@ -123,6 +123,7 @@ class Signup extends Component {
       this.props.history.push(`/profile/${userInfo.id}`);
       
     } catch (e) {
+      console.log(e);
       alert(e.message);
       this.setState({ isLoading: false });
     }
