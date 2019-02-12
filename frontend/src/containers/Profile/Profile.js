@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { API, Storage  } from "aws-amplify";
 import { Image } from "react-bootstrap";
 
+import banner from  "../../asset/banner.jpg";
+
 
 Storage.configure({ level: 'private' });
 class Profile extends Component {
@@ -30,7 +32,7 @@ class Profile extends Component {
   )
 
   getProfilePic = profilePic => (
-    profilePic ? Storage.vault.get(profilePic) : "http://localhost:3000/static/media/banner.9a3b5267.jpg"
+    profilePic ? Storage.vault.get(profilePic) : banner
   )
 
   render() {
