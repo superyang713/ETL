@@ -13,7 +13,6 @@ import { s3Upload } from "../../libs/awsLib";
 import "./Signup.css";
 import LoaderButton from "../../components/LoaderButton/LoaderButton";
 import config from "../../config";
-import defaultPic from "../../asset/banner.jpg";
 
 
 class Signup extends Component {
