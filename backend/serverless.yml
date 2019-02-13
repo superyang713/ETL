@@ -26,6 +26,7 @@ provider:
   runtime: nodejs8.10
   stage: dev
   region: us-east-1
+  profile: fullstack-notetaking-app
 
   # These environment variables are made available to our functions
   # under process.env.

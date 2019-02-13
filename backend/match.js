@@ -5,21 +5,20 @@ import { success, failure } from "./libs/response-lib.js";
 export async function main(event, context) {
   const params = {
     TableName: process.env.tableName,
-    KeyConditionExpression: "role = :role",
+    KeyConditionExpression: "#profile = :role",
     ExpressionAttributeValues: {
       ":role": event.pathParameters.role,
-    }
+    },
+    ExpressionAttributeNames: {
+      "#profile": "role",
+    },
   };
 
   try {
     const result = await dynamoDbLib.call("query", params);
-    if (result.Item) {
-      return success(result.Item);      
-    } else {
-      return failure({ status: false, error: "Item not found." });
-    }
+    return success(result.Items);
   } catch (e) {
-    console.log(e);
+    console.log(e)
     return failure({ status: false });
   }
 }
