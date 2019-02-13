@@ -12,7 +12,7 @@ export async function main(event, context) {
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
-      userCategory: data.category,
+      role: data.role,
       gender: data.gender,
       address: data.address,
       city: data.city,

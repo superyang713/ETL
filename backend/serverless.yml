@@ -1,4 +1,4 @@
-service: ETL-backend-version-1
+service: ETL-backend-version-2
 
 # Use the serverless-webpack plugin to transpile ES6
 plugins:
@@ -10,7 +10,7 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  tableName: ${self:custom.stage}-ETL-version-1
+  tableName: ${self:custom.stage}-ETL-version-2
   # Set our DynamoDB throughput for prod and all other non-prod stages.
   tableThroughputs:
     prod: 5
@@ -26,7 +26,6 @@ provider:
   runtime: nodejs8.10
   stage: dev
   region: us-east-1
-  profile: fullstack-notetaking-app
 
   # These environment variables are made available to our functions
   # under process.env.
@@ -62,7 +61,7 @@ functions:
     handler: get.main
     events:
       - http:
-          path: profile/{id}
+          path: profile/{role}
           method: get
           cors: true
           authorizer: aws_iam
@@ -71,7 +70,7 @@ functions:
     handler: match.main
     events:
       - http:
-          path: match/{userCategory}
+          path: match/{role}
           method: get
           cors: true
           authorizer: aws_iam

@@ -31,7 +31,7 @@ class Signup extends Component {
     confirmationCode: "",
     firstName: "",
     lastName: "",
-    category: "",
+    role: "",
     gender: "",
     address: "",
     city: "",
@@ -43,7 +43,7 @@ class Signup extends Component {
       this.state.password.length > 0 &&
       this.state.password === this.state.confirmPassword &&
       this.state.address.length > 0 &&
-      this.state.category.length > 0 &&
+      this.state.role.length > 0 &&
       this.state.gender.length > 0 &&
       this.state.city.length > 0 &&
       this.state.state.length > 0 &&
@@ -63,8 +63,8 @@ class Signup extends Component {
     this.file = event.target.files[0];
   }
 
-  handleCategoryGroupChange = event => {
-    this.setState({ category: event });
+  handleRoleGroupChange = event => {
+    this.setState({ role: event });
   }
 
   handleGenderGroupChange = event => {
@@ -82,7 +82,8 @@ class Signup extends Component {
     try {
       const newUser = await Auth.signUp({
         username: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        attributes: { profile: this.state.role}
       });
       this.setState({ newUser });
     } catch (e) {
@@ -109,7 +110,7 @@ class Signup extends Component {
       await this.createUser({
         profilePic: attachment,
         email: this.state.email,
-        category: this.state.category,
+        role: this.state.role,
         gender: this.state.gender,
         address: this.state.address,
         city: this.state.city,
@@ -162,9 +163,9 @@ class Signup extends Component {
       <form onSubmit={this.handleSubmit}>
         <ToggleButtonGroup
             type="radio"
-            name="category"
-            value={this.state.category}
-            onChange={this.handleCategoryGroupChange}
+            name="role"
+            value={this.state.role}
+            onChange={this.handleRoleGroupChange}
           >
             <ToggleButton value="student">Student</ToggleButton>
             <ToggleButton value="teacher">Teacher</ToggleButton>

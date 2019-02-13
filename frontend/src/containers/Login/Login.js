@@ -34,12 +34,12 @@ class Login extends Component {
       
       this.props.userHasAuthenticated(true);
       const userInfo = await Auth.currentUserInfo();
+
       this.props.history.push(`/profile/${userInfo.id}`);
     } catch (e) {
       alert(e.message);
       this.setState({ isLoading: false });
     }
-   
   }
 
   render() {

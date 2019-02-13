@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { API, Storage  } from "aws-amplify";
+import { API, Auth, Storage  } from "aws-amplify";
 import { Image } from "react-bootstrap";
 
 import banner from  "../../asset/banner.jpg";
@@ -15,20 +15,21 @@ class Profile extends Component {
   
   async componentDidMount() {
     try {
-      const user = await this.getUser();
-      this.setState({ user: user[0] });
+      const userInfo = await Auth.currentUserInfo();      
+      const user = await this.getUser(userInfo.attributes.profile);
+
+      this.setState({ user });
       this.setState({ isLoaded: true });
-      
+
       const image = await this.getProfilePic(this.state.user.profilePic);
       this.setState({ image });
     } catch (e) {
-      console.log(e);
       alert(e);
     }
   }
 
-  getUser = () => (
-    API.get("ETL", `/profile/${this.props.match.params.id}`)
+  getUser = profile => (
+    API.get("ETL", `/profile/${profile}`)
   )
 
   getProfilePic = profilePic => (

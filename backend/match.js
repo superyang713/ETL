@@ -5,9 +5,9 @@ import { success, failure } from "./libs/response-lib.js";
 export async function main(event, context) {
   const params = {
     TableName: process.env.tableName,
-    KeyConditionExpression: "userCategory = :userCategory",
+    KeyConditionExpression: "role = :role",
     ExpressionAttributeValues: {
-      ":userCategory": event.pathParameters.userCategory,
+      ":role": event.pathParameters.role,
     }
   };
 

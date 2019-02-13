@@ -4,12 +4,12 @@ Resources:
     Properties:
       TableName: ${self:custom.tableName}
       AttributeDefinitions:
-        - AttributeName: userCategory
+        - AttributeName: role
           AttributeType: S
         - AttributeName: userId
           AttributeType: S          
       KeySchema:
-        - AttributeName: userCategory
+        - AttributeName: role
           KeyType: HASH
         - AttributeName: userId
           KeyType: RANGE

@@ -1,7 +1,10 @@
 {
+  "pathParameters": {
+    "role": "teacher"
+  },
   "requestContext": {
     "identity": {
-      "cognitoIdentityId": "us-east-1:aac79d7a-4244-4249-bee1-6483e1a9e5cd"
+      "cognitoIdentityId": "us-east-1:aed49ba3-99cf-4b5d-9a54-f742e9954f4b"
     }
   }
 }

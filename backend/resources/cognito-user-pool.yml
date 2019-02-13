@@ -3,13 +3,18 @@ Resources:
     Type: AWS::Cognito::UserPool
     Properties:
       # Generate a name based on the stage
-      UserPoolName: ${self:custom.stage}-ETL-pool
+      UserPoolName: ${self:custom.stage}ETLSecondVersion
       # Set email as an alias
       UsernameAttributes:
         - email
       AutoVerifiedAttributes:
         - email
-
+      Schema:
+        - Name: profile
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+          
   CognitoUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
