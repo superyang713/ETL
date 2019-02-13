@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { API, Auth, Storage  } from "aws-amplify";
 import { Image } from "react-bootstrap";
 
-import banner from  "../../asset/banner.jpg";
+import { getCurrentUserInfo, getProfilePicFromS3 } from "../../libs/awsLib.js";
 
 
-Storage.configure({ level: 'private' });
 class Profile extends Component {
   state = {
     isLoaded: false,
@@ -15,26 +13,16 @@ class Profile extends Component {
   
   async componentDidMount() {
     try {
-      const userInfo = await Auth.currentUserInfo();      
-      const user = await this.getUser(userInfo.attributes.profile);
-
+      const user = getCurrentUserInfo();
       this.setState({ user });
       this.setState({ isLoaded: true });
 
-      const image = await this.getProfilePic(this.state.user.profilePic);
+      const image = await getProfilePicFromS3(this.state.user.profilePic);
       this.setState({ image });
     } catch (e) {
       alert(e);
     }
   }
-
-  getUser = profile => (
-    API.get("ETL", `/profile/${profile}`)
-  )
-
-  getProfilePic = profilePic => (
-    profilePic ? Storage.vault.get(profilePic) : banner
-  )
 
   render() {
     return (

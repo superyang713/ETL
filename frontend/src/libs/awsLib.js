@@ -1,4 +1,5 @@
-import { Storage } from "aws-amplify";
+import { Storage, API, Auth } from "aws-amplify";
+import banner from "../asset/banner.jpg";
 
 
 export async function s3Upload(file) {
@@ -14,4 +15,18 @@ export async function s3Upload(file) {
   console.log("uploaded file: ", stored);
 
   return stored.key;
+}
+
+export async function getCurrentUserInfo() {
+  const userInfo = await Auth.currentUserInfo();
+  const user = await API.get("ETL", `/profile/${userInfo.attributes.profile}`);
+  return user;
+}
+
+export function getProfilePicFromS3(profilePic) {
+  return profilePic ? Storage.vault.get(profilePic) : banner;
+}
+
+export function createUser(user) {
+  return API.post("ETL", "/register", {body: user});
 }

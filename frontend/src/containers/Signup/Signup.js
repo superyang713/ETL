@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Auth, API } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import {
   HelpBlock,
   FormGroup,
@@ -8,11 +8,12 @@ import {
   FormControl,
   ControlLabel
 } from "react-bootstrap";
-import { s3Upload } from "../../libs/awsLib";
 
+import { s3Upload } from "../../libs/awsLib";
 import "./Signup.css";
 import LoaderButton from "../../components/LoaderButton/LoaderButton";
 import config from "../../config";
+import { createUser } from "../../libs/awsLib.js";
 
 
 class Signup extends Component {
@@ -93,10 +94,6 @@ class Signup extends Component {
     this.setState({ isLoading: false });
   }
 
-  createUser = user => (
-    API.post("ETL", "/register", { body: user })
-  )
-
   handleConfirmationSubmit = async event => {
     event.preventDefault();
     this.setState({ isLoading: true });
@@ -107,7 +104,7 @@ class Signup extends Component {
       await Auth.signIn(this.state.email, this.state.password);
 
       const attachment = this.file ? await s3Upload(this.file) : null;
-      await this.createUser({
+      await createUser({
         profilePic: attachment,
         email: this.state.email,
         role: this.state.role,
