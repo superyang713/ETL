@@ -18,7 +18,7 @@ export async function main(event, context) {
     } else {
       return failure({ status: false, error: "Item not found." });
     }
-  } catch (e){
+  } catch (e) {
     console.log(e);
     return failure({ status: false });
   }
