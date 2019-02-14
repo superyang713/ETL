@@ -88,6 +88,7 @@ class Signup extends Component {
       });
       this.setState({ newUser });
     } catch (e) {
+      console.log(e);
       alert(e.message);
     }
 

@@ -13,7 +13,7 @@ class Profile extends Component {
   
   async componentDidMount() {
     try {
-      const user = getCurrentUserInfo();
+      const user = await getCurrentUserInfo();
       this.setState({ user });
       this.setState({ isLoaded: true });
 
@@ -22,6 +22,10 @@ class Profile extends Component {
     } catch (e) {
       alert(e);
     }
+  }
+
+  randomChoice(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
   }
 
   render() {

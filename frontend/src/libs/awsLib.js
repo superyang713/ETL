@@ -5,7 +5,7 @@ import banner from "../asset/banner.jpg";
 export async function s3Upload(file) {
   const filename = `${Date.now()}-${file.name}`;
 
-  const stored = await Storage.put(
+  const stored = await Storage.vault.put(
     filename,
     file,
     {
