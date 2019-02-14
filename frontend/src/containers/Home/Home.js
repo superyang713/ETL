@@ -25,7 +25,11 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        {this.props.isAuthenticated ? <Redirect to={this.state.profile_url}/> : <Lander />}
+        {
+          this.props.isAuthenticated
+            ? <Redirect to={this.state.profile_url}/>
+            : <Lander />
+        }
       </div>
     );
   }
