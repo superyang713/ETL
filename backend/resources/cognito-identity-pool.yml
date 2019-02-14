@@ -81,6 +81,16 @@ Resources:
                     - ''
                     -
                       - Fn::GetAtt: [AttachmentsBucket, Arn]
+                      - '/public/*'
+
+              - Effect: 'Allow'
+                Action:
+                  - 's3:*'
+                Resource:
+                  - Fn::Join:
+                    - ''
+                    -
+                      - Fn::GetAtt: [AttachmentsBucket, Arn]
                       - '/private/'
                       - '$'
                       - '{cognito-identity.amazonaws.com:sub}/*'

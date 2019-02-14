@@ -9,10 +9,9 @@ export async function s3Upload(file) {
     filename,
     file,
     {
-      contentType: file.type
+      contentType: file.type,
+      level: "public"
     });
-
-  console.log("uploaded file: ", stored);
 
   return stored.key;
 }
@@ -24,7 +23,7 @@ export async function getCurrentUserInfo() {
 }
 
 export function getProfilePicFromS3(profilePic) {
-  return profilePic ? Storage.vault.get(profilePic) : banner;
+  return profilePic ? Storage.vault.get(profilePic, {level: "public"}) : banner;
 }
 
 export function createUser(user) {
