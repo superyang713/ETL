@@ -1,5 +1,5 @@
 import { Storage, API, Auth } from "aws-amplify";
-import banner from "../asset/banner.jpg";
+import defaultPic from "assets/img/faces/marc.jpg";
 
 
 export async function s3Upload(file) {
@@ -23,7 +23,7 @@ export async function getCurrentUserInfo() {
 }
 
 export function getProfilePicFromS3(profilePic) {
-  return profilePic ? Storage.vault.get(profilePic, {level: "public"}) : banner;
+  return profilePic ? Storage.vault.get(profilePic, {level: "public"}) : defaultPic;
 }
 
 export function createUser(user) {

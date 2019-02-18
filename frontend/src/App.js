@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Auth } from "aws-amplify";
 import { withRouter } from "react-router-dom";
 
-import './App.css';
-import Header from "./components/Header/Header";
-import Routes from "./Routes";
+import Routes from "Routes";
+import Header from "components/Header/Header.jsx";
+import HeaderLinks from "components/Header/HeaderLinks.jsx";
+
+import brand from "assets/img/logo.png";
 
 
 class App extends Component {
@@ -28,7 +30,7 @@ class App extends Component {
   handleLogout = async event => {
     await Auth.signOut();
     this.userHasAuthenticated(false);
-    this.props.history.push("/login");
+    this.props.history.push("/");
   }
   
   userHasAuthenticated = authenticated => {
@@ -43,13 +45,26 @@ class App extends Component {
 
     return (
       !this.state.isAuthenticating &&
-      <div className="App container">
-        <Header
-          isAuthenticated={this.state.isAuthenticated}
-          handleLogout={this.handleLogout}
-        />
-        <Routes childProps={childProps} />
-      </div>
+        <div className="App container">
+          
+          <Header
+            color="transparent"
+            brand={brand}
+            fixed
+            rightLinks={
+              <HeaderLinks
+                isAuthenticated={this.state.isAuthenticated}
+                handleLogout={this.handleLogout}
+              />}
+            changeColorOnScroll={{
+              height: 400,
+              color: "white"
+            }}
+          />
+
+          <Routes childProps={childProps} />
+          
+        </div>
     );
   }
 }

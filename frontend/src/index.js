@@ -1,14 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom";
+import { createBrowserHistory } from "history";
+import { Router } from "react-router-dom";
+
+import "assets/scss/material-kit-react.scss?v=1.4.0";
+import config from "./config";
 import Amplify from "aws-amplify";
 
-import * as serviceWorker from './serviceWorker';
 import App from './App';
-import config from "./config";
-import './index.css';
 
 
+const hist = createBrowserHistory();
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
@@ -33,12 +35,9 @@ Amplify.configure({
   }
 });
 
-
 ReactDOM.render(
-  <Router>
+  <Router history={hist}>
     <App />
   </Router>,
   document.getElementById("root")
 );
-
-serviceWorker.unregister();
