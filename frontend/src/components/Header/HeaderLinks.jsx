@@ -22,7 +22,7 @@ class HeaderLinks extends Component {
           target="_blank"
           className={classes.navLink}
         >
-          <Link className={classes.link} to="/">
+          <Link className={classes.link} to="/about">
             <Business className={classes.icons} /> About
           </Link>
         </Button>
