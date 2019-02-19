@@ -4,7 +4,6 @@ import { s3Upload } from "libs/awsLib";
 import { createUser } from "libs/awsLib";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
@@ -43,9 +42,6 @@ class Signup extends React.Component {
     lastName: "",
     role: "",
     gender: "",
-    address: "",
-    city: "",
-    state: "",
   };
 
   componentDidMount() {
@@ -114,9 +110,6 @@ class Signup extends React.Component {
         email: this.state.email,
         role: this.state.role,
         gender: this.state.gender,
-        address: this.state.address,
-        city: this.state.city,
-        state: this.state.state,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
       });
@@ -170,7 +163,7 @@ class Signup extends React.Component {
         <CardBody>
 
           <GridContainer>
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={6}>
               <FormControl fullWidth component="fieldset" className={classes.formControl}>
                 <FormLabel component="legend">Role</FormLabel>
                 <RadioGroup
@@ -186,7 +179,7 @@ class Signup extends React.Component {
               </FormControl>
             </GridItem>
 
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={6}>
               <FormControl fullWidth component="fieldset" className={classes.formControl}>
                 <FormLabel component="legend">Gender</FormLabel>
                 <RadioGroup
@@ -202,7 +195,7 @@ class Signup extends React.Component {
               </FormControl>
             </GridItem>
           </GridContainer>
-          
+
           <CustomInput
             labelText="Email..."
             formControlProps={{
@@ -269,45 +262,6 @@ class Signup extends React.Component {
           />
 
           <CustomInput
-            labelText="Address"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              type: "address",
-              id: "address",
-              value: this.state.address,
-              onChange: this.handleChange,
-            }}
-          />
-
-          <CustomInput
-            labelText="City"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              type: "city",
-              id: "city",
-              value: this.state.city,
-              onChange: this.handleChange,
-            }}
-          />
-
-          <CustomInput
-            labelText="State"
-            formControlProps={{
-              fullWidth: true
-            }}
-            inputProps={{
-              type: "state",
-              id: "state",
-              value: this.state.state,
-              onChange: this.handleChange,
-            }}
-          />
-
-          <CustomInput
             labelText="Profile Picture"
             formControlProps={{
               fullWidth: true
@@ -318,8 +272,8 @@ class Signup extends React.Component {
               onChange: this.handleFileChange,
             }}
           />
-
         </CardBody>
+
         <CardFooter className={classes.cardFooter}>
           <Button type="submit" simple color="primary" size="lg">
             Submit
@@ -353,7 +307,6 @@ class Signup extends React.Component {
             </GridItem>
           </GridContainer>
         </div>
-        <Footer whiteFont />
       </div>
     );
   }

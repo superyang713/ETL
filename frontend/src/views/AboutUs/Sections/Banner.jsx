@@ -2,8 +2,6 @@ import React from "react";
 
 import Parallax from "components/Parallax/Parallax.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.jsx";
 
 import landingBg from "assets/img/landing-bg.jpg";
 
