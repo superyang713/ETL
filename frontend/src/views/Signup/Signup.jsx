@@ -82,7 +82,6 @@ class Signup extends React.Component {
     }
 
     try {
-      console.log(this.state);
       const newUser = await Auth.signUp({
         username: this.state.email,
         password: this.state.password,
@@ -104,7 +103,6 @@ class Signup extends React.Component {
       await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
       await Auth.signIn(this.state.email, this.state.password);
       const attachment = this.file ? await s3Upload(this.file) : null;
-      console.log(this.state);
       await createUser({
         profilePic: attachment,
         email: this.state.email,
