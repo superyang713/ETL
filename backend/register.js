@@ -14,9 +14,6 @@ export async function main(event, context) {
       lastName: data.lastName,
       role: data.role,
       gender: data.gender,
-      address: data.address,
-      city: data.city,
-      state: data.state,
       profilePic: data.profilePic,
       createdAt: Date.now(),
     }
