@@ -8,7 +8,6 @@ import HeaderLinks from "components/Header/HeaderLinks.jsx";
 
 import brand from "assets/img/logo.png";
 
-
 class App extends Component {
   state = {
     isAuthenticated: false,

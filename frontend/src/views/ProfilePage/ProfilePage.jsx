@@ -13,6 +13,7 @@ import DisplayMatch from "components/DisplayMatch/DisplayMatch.jsx";
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 import profilebg from "assets/img/profile-bg.jpg";
+import Preloader from "../../components/Preloader/Preloader";
 
 
 class ProfilePage extends Component {
@@ -22,6 +23,7 @@ class ProfilePage extends Component {
     matched_user: {},
     userImage: "",
     matchImage: "",
+    isLoading: false
   }
 
   async componentDidMount() {
@@ -87,6 +89,9 @@ class ProfilePage extends Component {
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
                   <form onSubmit={this.handleSubmit}>
+                    {this.state.isLoading ?
+                    <Preloader />
+                     : 
                     <Button
                       color="info"
                       size="lg"
@@ -94,9 +99,8 @@ class ProfilePage extends Component {
                       rel="noopener noreferrer"
                       type="submit"
                     >
-                      <i className="fas fa-play" />
                       Find A Match
-                    </Button>
+                    </Button>}
                   </form>
                 </GridItem>
               </GridContainer>
