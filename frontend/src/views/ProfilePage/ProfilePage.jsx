@@ -13,7 +13,7 @@ import DisplayMatch from "components/DisplayMatch/DisplayMatch.jsx";
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 import profilebg from "assets/img/profile-bg.jpg";
-import Preloader from "../../components/Preloader/Preloader";
+import Preloader from "components/Preloader/Preloader";
 
 
 class ProfilePage extends Component {
