@@ -4,7 +4,6 @@ import { API } from "aws-amplify";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { getCurrentUserInfo, getProfilePicFromS3 } from "../../libs/awsLib";
 
-import Button from "components/CustomButtons/Button.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
@@ -13,8 +12,7 @@ import DisplayMatch from "components/DisplayMatch/DisplayMatch.jsx";
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 import profilebg from "assets/img/profile-bg.jpg";
-import Preloader from "components/Preloader/Preloader";
-
+import LoadButton from "components/LoadButton/LoadButton";
 
 class ProfilePage extends Component {
   state = {
@@ -46,11 +44,11 @@ class ProfilePage extends Component {
       const roleNeeded = this.state.user.role === "student" ? "teacher" : "student";
       const matched_user = await API.get("ETL", `/match/${roleNeeded}`);
       this.setState({ matched_user });
-      
+
       const matchImage = await getProfilePicFromS3(this.state.matched_user.profilePic);
       this.setState({ matchImage });
       this.setState({ isLoading: false });
-    } catch(e) {
+    } catch (e) {
       alert(e);
     }
   }
@@ -88,31 +86,18 @@ class ProfilePage extends Component {
 
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
-                  <form onSubmit={this.handleSubmit}>
-                    {this.state.isLoading ?
-                    <Preloader />
-                     : 
-                    <Button
-                      color="info"
-                      size="lg"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      type="submit"
-                    >
-                      Find A Match
-                    </Button>}
-                  </form>
+                  <LoadButton handleSubmit={this.handleSubmit} isLoading={this.state.isLoading} />
                 </GridItem>
               </GridContainer>
 
-              <br/><br/><br/>
-              
+              <br /><br /><br />
+
               {this.state.matched_user &&
-               <DisplayMatch
-                 classes={classes}
-                 matched_user={this.state.matched_user}
-                 matchImage={this.state.matchImage}
-               />
+                <DisplayMatch
+                  classes={classes}
+                  matched_user={this.state.matched_user}
+                  matchImage={this.state.matchImage}
+                />
               }
             </div>
           </div>
