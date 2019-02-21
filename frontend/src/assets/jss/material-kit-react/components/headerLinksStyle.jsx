@@ -13,7 +13,7 @@ const headerLinksStyle = theme => ({
     paddingBottom: "0",
     color: "inherit"
   },
-  
+
   listItem: {
     float: "left",
     color: "inherit",
@@ -37,6 +37,14 @@ const headerLinksStyle = theme => ({
 
   link: {
     color: "inherit",
+
+    // Expand the clicking area
+    display: 'inline-block',
+    position: 'relative',
+    zIndex: '1',
+    padding: '2em',
+    margin: '-2em',
+
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       "&:after": {
@@ -44,11 +52,11 @@ const headerLinksStyle = theme => ({
       }
     }
   },
-  
+
   listItemText: {
     padding: "0 !important"
   },
-  
+
   navLink: {
     color: "inherit",
     position: "relative",
@@ -76,7 +84,7 @@ const headerLinksStyle = theme => ({
       }
     }
   },
-  
+
   notificationNavLink: {
     color: "inherit",
     padding: "0.9375rem",
@@ -89,7 +97,7 @@ const headerLinksStyle = theme => ({
     display: "inline-flex",
     top: "4px"
   },
-  
+
   registerNavLink: {
     top: "3px",
     position: "relative",
@@ -101,24 +109,24 @@ const headerLinksStyle = theme => ({
     margin: "0px",
     display: "inline-flex"
   },
-  
+
   navLinkActive: {
     color: "inherit",
     backgroundColor: "rgba(255, 255, 255, 0.1)"
   },
-  
+
   icons: {
     width: "20px",
     height: "20px",
     marginRight: "3px"
   },
-  
+
   socialIcons: {
     position: "relative",
     fontSize: "20px !important",
     marginRight: "4px"
   },
-  
+
   dropdownLink: {
     "&,&:hover,&:focus": {
       color: "inherit",
@@ -127,7 +135,7 @@ const headerLinksStyle = theme => ({
       padding: "10px 20px"
     }
   },
-  
+
   ...tooltip,
   marginRight5: {
     marginRight: "5px"
