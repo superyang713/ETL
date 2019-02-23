@@ -4,7 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
-import { Create, Business, LockOpen } from "@material-ui/icons";
+import { Create, Business, LockOpen, FindInPage } from "@material-ui/icons";
 
 import Button from "components/CustomButtons/Button.jsx";
 import headerLinksStyle from "assets/jss/material-kit-react/components/headerLinksStyle.jsx";
@@ -13,6 +13,7 @@ import headerLinksStyle from "assets/jss/material-kit-react/components/headerLin
 class HeaderLinks extends Component {
   render() {
     const { classes } = this.props;
+    console.log(classes.link);
     return (
       <List className={classes.list}>
 
@@ -24,7 +25,7 @@ class HeaderLinks extends Component {
           >
             <Link className={classes.link} to="/about">
               <Business className={classes.icons} /> About
-          </Link>
+            </Link>
           </Button>
         </ListItem>
 
@@ -34,9 +35,15 @@ class HeaderLinks extends Component {
             target="_blank"
             className={classes.navLink}
           >
-            <Link className={classes.link} to="/signup">
-              <Create className={classes.icons} /> Sign Up
-          </Link>
+            {this.props.isAuthenticated ?
+              <Link className={classes.link} to="/profile/usr">
+                <FindInPage className={classes.icons} /> Match
+              </Link>
+              :
+              <Link className={classes.link} to="/signup">
+                <Create className={classes.icons} /> Register
+              </Link>
+            }
           </Button>
         </ListItem>
 
@@ -56,7 +63,11 @@ class HeaderLinks extends Component {
               </Button>
             </Fragment>
             : <Fragment>
-              <Button color="transparent" target="_blank" className={classes.navLink}>
+              <Button
+                color="transparent"
+                target="_blank"
+                className={classes.navLink}
+              >
                 <Link className={classes.link} to="/login-page">
                   <LockOpen className={classes.icons} /> Login
                 </Link>
