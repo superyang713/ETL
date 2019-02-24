@@ -13,7 +13,6 @@ import headerLinksStyle from "assets/jss/material-kit-react/components/headerLin
 class HeaderLinks extends Component {
   render() {
     const { classes } = this.props;
-    console.log(classes.link);
     return (
       <List className={classes.list}>
 

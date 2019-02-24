@@ -74,7 +74,7 @@ class Header extends Component {
     });
     const brandComponent = (
       <Button className={classes.title}>
-        <Link to="/">
+        <Link className={classes.link} to="/">
           <img className={classes.brandImage} src={brand} alt="logo"/>
         </Link>
       </Button>
