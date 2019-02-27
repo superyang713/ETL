@@ -32,6 +32,14 @@ const headerStyle = {
     zIndex: "unset"
   },
 
+  link: {
+    display: 'inline-block',
+    position: 'relative',
+    zIndex: '1',
+    padding: '2em',
+    margin: '-2em',
+  },
+
   absolute: {
     position: "absolute",
     zIndex: "1100"
